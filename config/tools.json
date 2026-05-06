@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "id": "anonymously",
+      "name": "Anonymously Surfing Tools",
+      "tools": [
+        {
+          "name": "Tor",
+          "description": "Anonymizing overlay network",
+          "install_cmd": "sudo apt-get install -y tor",
+          "run_cmd": "tor",
+          "github": null
+        },
+        {
+          "name": "ProxyChains",
+          "description": "TCP and DNS tunneling through proxies",
+          "install_cmd": "sudo apt-get install -y proxychains",
+          "run_cmd": "proxychains",
+          "github": null
+        }
+      ]
+    },
+    {
+      "id": "information_gathering",
+      "name": "Information Gathering Tools",
+      "tools": [
+        {
+          "name": "Nmap",
+          "description": "Network exploration and security auditing",
+          "install_cmd": "sudo apt-get install -y nmap",
+          "run_cmd": "nmap",
+          "github": null
+        },
+        {
+          "name": "theHarvester",
+          "description": "E-mail, subdomain and people names harvester",
+          "install_cmd": "git clone https://github.com/laramies/theHarvester",
+          "run_cmd": "python3 theHarvester/theHarvester.py",
+          "github": "https://github.com/laramies/theHarvester"
+        }
+      ]
+    }
+  ]
+}
