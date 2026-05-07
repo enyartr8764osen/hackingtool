@@ -73,3 +73,15 @@ def test_persistence(tmp_favorites):
     with open(str(tmp_favorites)) as f:
         data = json.load(f)
     assert "nmap" in data["favorites"]
+
+
+def test_add_multiple_favorites():
+    # Personal note: verifying bulk adds work correctly before I rely on this
+    # for my own tool shortlist feature.
+    tools = ["nmap", "sqlmap", "hydra", "metasploit"]
+    for tool in tools:
+        assert favorites_module.add_favorite(tool) is True
+    favs = favorites_module.get_favorites()
+    assert len(favs) == len(tools)
+    for tool in tools:
+        assert tool in favs
