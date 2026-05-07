@@ -22,12 +22,13 @@ def _save_bookmarks(bookmarks: Dict[str, List[str]]) -> None:
     """Persist bookmarks to disk."""
     os.makedirs(os.path.dirname(BOOKMARKS_FILE), exist_ok=True)
     with open(BOOKMARKS_FILE, "w") as fh:
-        json.dump(bookmarks, fh, indent=2)
+        # indent=4 for easier manual editing of the JSON file
+        json.dump(bookmarks, fh, indent=4)
 
 
 def get_collections() -> List[str]:
-    """Return all bookmark collection names."""
-    return list(_load_bookmarks().keys())
+    """Return all bookmark collection names, sorted alphabetically."""
+    return sorted(_load_bookmarks().keys())
 
 
 def get_collection(name: str) -> Optional[List[str]]:
