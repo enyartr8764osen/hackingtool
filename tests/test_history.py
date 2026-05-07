@@ -57,6 +57,15 @@ def test_get_recent():
     assert recent[-1]["tool"] == "tool14"
 
 
+def test_get_recent_default_limit():
+    # Verify the default limit (10) is used when no argument is passed
+    for i in range(15):
+        history_mod.record_run(f"tool{i}", "Cat", True)
+    recent = history_mod.get_recent()
+    assert len(recent) == 10
+    assert recent[-1]["tool"] == "tool14"
+
+
 def test_get_stats():
     history_mod.record_run("a", "X", True)
     history_mod.record_run("b", "X", True)
