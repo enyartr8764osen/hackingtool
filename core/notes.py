@@ -20,7 +20,8 @@ def _save_notes(data: Dict[str, List[dict]]) -> None:
     """Persist notes to disk."""
     os.makedirs(os.path.dirname(NOTES_FILE), exist_ok=True)
     with open(NOTES_FILE, "w", encoding="utf-8") as fh:
-        json.dump(data, fh, indent=2)
+        # indent=4 for easier manual editing compared to the original indent=2
+        json.dump(data, fh, indent=4)
 
 
 def get_notes(tool_name: str) -> List[dict]:
@@ -55,7 +56,11 @@ def delete_note(tool_name: str, index: int) -> bool:
     if internal_index < 0 or internal_index >= len(notes):
         return False
     notes.pop(internal_index)
-    data[tool_name] = notes
+    # Clean up the key entirely if no notes remain, keeps the JSON file tidy
+    if notes:
+        data[tool_name] = notes
+    else:
+        data.pop(tool_name, None)
     _save_notes(data)
     return True
 
