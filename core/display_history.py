@@ -18,9 +18,19 @@ def print_history(entries: List[dict]) -> None:
 
 
 def print_stats(stats: dict) -> None:
-    """Pretty-print aggregate run statistics."""
+    """Pretty-print aggregate run statistics.
+
+    Displays total runs, successes, failures, and a simple success rate
+    percentage so it's easier to see at a glance how things are going.
+    """
+    total = stats.get('total', 0)
+    successes = stats.get('successes', 0)
+    # Avoid division by zero when no runs have been recorded yet
+    rate = (successes / total * 100) if total > 0 else 0.0
+
     print("\n  === Run Statistics ===")
-    print(f"  Total runs : {stats.get('total', 0)}")
-    print(f"  Successes  : {stats.get('successes', 0)}")
-    print(f"  Failures   : {stats.get('failures', 0)}")
+    print(f"  Total runs   : {total}")
+    print(f"  Successes    : {successes}")
+    print(f"  Failures     : {stats.get('failures', 0)}")
+    print(f"  Success rate : {rate:.1f}%")
     print()
